@@ -1,17 +1,35 @@
+// include Fake lib
 #r "packages/FAKE/tools/FakeLib.dll"
 open Fake
 
+RestorePackages()
+
+// Properties
 let buildDir = "./build/"
 
+// Targets
 Target "Clean" (fun _ ->
-  CleanDir buildDir
+  CleanDirs [buildDir]
 )
 
-Target "Default" (fun _ ->
-  trace "Hello World from FAKE"
+Target "Build" (fun _ ->
+  !! "**/*.fsproj"
+    |> MSBuildRelease buildDir "Build"
+    |> Log "Build-Output: "
 )
 
+//Target "Test" (fun _ ->
+//  !! (buildDir + "/*Tests.dll")
+//    |> NUnit (fun p ->
+//      {p with
+//        DisableShadowCopy = true;
+//        OutputFile = buildDir + "TestResults.xml" })
+//)
+
+// Dependencies
 "Clean"
-  ==> "Default"
+  ==> "Build"
+//  ==> "Test"
 
-RunTargetOrDefault "Default"
+// start build
+RunTargetOrDefault "Test"
