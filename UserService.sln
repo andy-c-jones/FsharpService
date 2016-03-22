@@ -12,6 +12,12 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UserService", "UserService\
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UserService.Tests", "UserService.Tests\UserService.Tests.fsproj", "{5F78F1F7-5EC3-43A6-A87F-05D48F305DC8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E43582D-7D09-4F4E-947E-E29D3A7D09AA}"
+	ProjectSection(SolutionItems) = preProject
+		build.fsx = build.fsx
+		precommit.ps1 = precommit.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
