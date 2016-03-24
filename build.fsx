@@ -32,4 +32,4 @@ Target "Build" (fun _ ->
 //  ==> "Test"
 
 // start build
-RunTargetOrDefault "Test"
+RunTargetOrDefault "Build"
