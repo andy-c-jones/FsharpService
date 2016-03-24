@@ -1,6 +1,7 @@
 // include Fake lib
 #r "packages/FAKE/tools/FakeLib.dll"
 open Fake
+open Fake.Testing.NUnit3
 
 RestorePackages()
 
@@ -18,18 +19,19 @@ Target "Build" (fun _ ->
     |> Log "Build-Output: "
 )
 
-//Target "Test" (fun _ ->
-//  !! (buildDir + "/*Tests.dll")
-//    |> NUnit (fun p ->
-//      {p with
-//        DisableShadowCopy = true;
-//        OutputFile = buildDir + "TestResults.xml" })
-//)
+Target "Test" (fun _ ->
+  !! (buildDir + "/*Tests.dll")
+    |> NUnit3 (fun p ->
+      {p with
+        //ToolName = "nunit3-console.exe"
+        ToolPath = "packages/NUnit.ConsoleRunner/tools/nunit3-console.exe" 
+        })
+)
 
 // Dependencies
 "Clean"
   ==> "Build"
-//  ==> "Test"
+  ==> "Test"
 
 // start build
-RunTargetOrDefault "Build"
+RunTargetOrDefault "Test"

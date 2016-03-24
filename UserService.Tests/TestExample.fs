@@ -2,6 +2,9 @@
 open NUnit.Framework
 open FsUnit
 
-[<Test>]
-let test =
-  1 |> should equal 1
+[<TestFixture>]
+  type fixture ()=
+    [<Test>]member x.
+         ``when I ask whether it is On it answers false.`` ()=
+                1 |> should equal 1
+        
