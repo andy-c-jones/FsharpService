@@ -6,15 +6,16 @@ module App =
   open Suave.Successful
   open Suave.Json
   
-  let app =
+  let app : WebPart =
     choose
       [ GET >=> choose
           [ path "/hello" >=> OK "Hello GET"
             path "/goodbye" >=> OK "Good bye GET" ]
         POST >=> choose
-          [ path "/create" >=> OK "Hello POST"
+          [ path "/create" >=> Writers.setMimeType "application/json" >=> OK "{id:1234}"
             path "/goodbye" >=> OK "Good bye POST" ]
-        //POST >=> request(fun r -> OK <| deserialiseHere r.form <| validateInput )
+        DELETE >=> choose
+          [ pathScan "/users/%d" (fun (id :int) -> printfn "id"; OK "200") >=> Writers.setMimeType "application/json"]
          ]
   
   [<EntryPoint>]
